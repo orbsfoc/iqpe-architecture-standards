@@ -6,6 +6,7 @@ Repository for architecture decisions, phase-aware technology policy, and tech r
 
 - `docs/source/DemoArchitectureDocs` (merged architecture source set)
 - `docs/source/02-architecture` (concrete architecture baseline)
+- `docs/source/02-architecture/scaling-and-libraries` (feature 04-10 governance references + rollout/matrix)
 - `docs/README.md` (architecture standards docs index)
 
 ## Owns
