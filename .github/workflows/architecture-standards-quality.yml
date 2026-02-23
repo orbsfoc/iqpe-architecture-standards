@@ -1,0 +1,24 @@
+name: architecture-standards-quality
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  validate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify required baseline docs
+        run: |
+          test -f README.md
+          test -f CHANGELOG.md
+          test -f OWNERS.md
+          test -f docs/README.md
+      - name: Verify extracted architecture sources
+        run: |
+          test -f docs/source/DemoArchitectureDocs/ADR-INDEX.md
+          test -f docs/source/DemoArchitectureDocs/ADR-009-go-implementation-standards.md
+          test -f docs/source/02-architecture/adr-002-approved-tech-baseline.md
+          test -f docs/source/02-architecture/service-and-component-model.md

@@ -1,0 +1,29 @@
+bundle_id: demo-merged-architecture-docs
+bundle_version: 2026-02-22
+bundle_scope: demo
+sources:
+  - source_id: refactored-technical-docs
+    source_root: Docs/RefactoredTechnicalDocs/00-architecture
+    includes:
+      - ADR-INDEX.md
+      - ADR-001-hexagonal-architecture.md
+      - ADR-002-openapi-contract-first.md
+      - ADR-003-tiered-authentication-evolution.md
+      - ADR-004-bootstrap-aggregation.md
+      - ADR-005-event-driven-achievement-pipeline.md
+      - ADR-006-ku-to-experience-contract.md
+      - ADR-007-audience-safe-achievement-views.md
+      - ADR-008-edge-security-and-platform-controls.md
+      - ADR-009-go-implementation-standards.md
+      - service-catalog.md
+      - service-function-link-matrix.md
+      - service-interfaces.md
+  - source_id: concrete-poc-product
+    source_root: Docs/ConcretePOCProduct/02-architecture
+    includes:
+      - adr-001-foundation.md
+      - adr-002-approved-tech-baseline.md
+      - service-and-component-model.md
+notes:
+  - This directory is a flattened demo bundle for MCP docs-graph queries.
+  - Canonical edit locations remain in the original source roots.
