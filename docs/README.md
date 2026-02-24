@@ -4,6 +4,7 @@
 
 - ADR baseline
 - Technology policy matrix
+- Planning behavior policy/profile (MCP-configurable)
 - Tech radar policy
 - Architecture-to-operations linkage rules
 - Extracted architecture sources: `source/DemoArchitectureDocs` and `source/02-architecture`
