@@ -40,3 +40,10 @@ Define a generic, dependency-driven planning behavior model that can be configur
 ## Gate behavior
 - If profile is missing or not loaded via MCP evidence, planning status is `BLOCKED`.
 - If required controls are unresolved or violated, implementation status is `BLOCKED`.
+
+For HTTP/API implementation work, if mandatory contract-first controls are unset, status must default to `BLOCKED` until controls are resolved.
+
+## Dependency sequencing examples
+- Example A (API-first): OpenAPI spec approved -> server stub generation -> client SDK/typed client -> feature implementation -> contract tests.
+- Example B (UI depends on API): OpenAPI approved -> API handler implementation -> UI integration -> end-to-end tests.
+- Example C (error schema): Error schema fixed in OpenAPI -> server enforcement -> client error handling -> negative-path tests.
