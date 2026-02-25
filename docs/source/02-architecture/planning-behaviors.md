@@ -28,6 +28,21 @@ Define a generic, dependency-driven planning behavior model that can be configur
 - `reviews.require_coding_principles`: required coding principles (for example SOLID, DRY).
 - `integration.require_gate_after_prerequisites`: integration/orchestration can start only after prerequisites pass.
 - `evidence.require_ai_usage_metrics`: require request/token/cost recording when telemetry is available.
+- `storage.strategy_required`: require explicit storage strategy by data category.
+- `storage.primary_system_of_record`: preferred primary source-of-truth storage model.
+- `storage.cache_policy_required`: require cache invalidation + TTL strategy.
+- `storage.object_storage_for_blobs_required`: require blob/binary payloads to use object storage.
+- `eventing.async_eventing_policy`: define when asynchronous eventing is required vs optional.
+- `eventing.delivery_semantics_default`: default delivery semantics (for example at-least-once).
+- `eventing.ordering_scope_default`: required ordering scope (for example per aggregate key).
+- `eventing.schema_versioning_required`: require versioned event contracts.
+- `eventing.idempotent_consumers_required`: require idempotent event consumers.
+- `production.scalability_budget_required`: require throughput/scale budget at planning time.
+- `production.performance_slo_required`: require explicit latency/error SLO targets.
+- `production.maintainability_controls_required`: require maintainability controls (ownership, runbooks, tests).
+- `production.upgrade_strategy_required`: require backward-compatible upgrade path and rollback plan.
+- `production.zero_downtime_upgrades_required`: require upgrade plans that avoid planned downtime for production traffic.
+- `production.operability_slos_required`: require observability and operational SLO plans.
 
 ## Minimum planning artifacts
 - `docs/repo-topology-decision.md`
@@ -36,10 +51,14 @@ Define a generic, dependency-driven planning behavior model that can be configur
 - `docs/plans/index.md`
 - `docs/plans/PLAN-*.md` (when `plan_storage_mode=per-story-files`)
 - `docs/dependency-graph.md` or equivalent machine-readable graph
+- `docs/plans/storage-planning-behavior.md`
+- `docs/plans/eventing-planning-behavior.md`
+- `docs/plans/production-capability-planning-behavior.md`
 
 ## Gate behavior
 - If profile is missing or not loaded via MCP evidence, planning status is `BLOCKED`.
 - If required controls are unresolved or violated, implementation status is `BLOCKED`.
+- If zero-downtime upgrade strategy is missing for production-facing changes, planning status is `BLOCKED`.
 
 For HTTP/API implementation work, if mandatory contract-first controls are unset, status must default to `BLOCKED` until controls are resolved.
 
