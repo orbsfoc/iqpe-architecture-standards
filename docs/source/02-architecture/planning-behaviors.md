@@ -30,6 +30,9 @@ Define a generic, dependency-driven planning behavior model that can be configur
 - `evidence.require_ai_usage_metrics`: require request/token/cost recording when telemetry is available.
 - `storage.strategy_required`: require explicit storage strategy by data category.
 - `storage.primary_system_of_record`: preferred primary source-of-truth storage model.
+- `storage.prefer_standard_interfaces`: prefer storage technologies with standard interfaces/protocols (for example SQL, Redis-compatible, S3-compatible) to reduce lock-in and migration risk.
+- `storage.prefer_managed_service_reuse`: prefer proven third-party/managed services over custom-built storage systems for common capabilities.
+- `storage.custom_storage_requires_tradeoff_doc`: custom storage implementations require explicit tradeoff documentation (cost/performance/operability/portability).
 - `storage.cache_policy_required`: require cache invalidation + TTL strategy.
 - `storage.object_storage_for_blobs_required`: require blob/binary payloads to use object storage.
 - `eventing.async_eventing_policy`: define when asynchronous eventing is required vs optional.
@@ -43,6 +46,17 @@ Define a generic, dependency-driven planning behavior model that can be configur
 - `production.upgrade_strategy_required`: require backward-compatible upgrade path and rollback plan.
 - `production.zero_downtime_upgrades_required`: require upgrade plans that avoid planned downtime for production traffic.
 - `production.operability_slos_required`: require observability and operational SLO plans.
+- `service_module.value_hypothesis_required`: require each service/module to state explicit customer/business value.
+- `service_module.customer_outcome_link_required`: require measurable linkage from service/module to customer outcomes.
+- `service_module.lifecycle_maintenance_cost_assessment_required`: require expected long-term maintenance cost and complexity analysis.
+- `service_module.build_vs_buy_balance_required`: require balanced comparison of building custom modules versus reusing existing services/modules.
+- `service_module.ownership_and_sunset_plan_required`: require owner assignment and retirement/sunset strategy for modules that lose value.
+- `service_module.necessity_evidence_required`: require evidence that a new service/module is necessary (cannot be met by existing bounded context/module without harmful coupling).
+- `service_module.unwarranted_service_creation_prohibited`: prohibit service/module creation without clear necessity, value, and lifecycle justification.
+- `repo_strategy.repo_action_plan_required`: require explicit repo action plan for each service/module.
+- `repo_strategy.create_vs_update_decision_required`: require `create` vs `update` decision per affected service/module repo.
+- `repo_strategy.prefer_updating_existing_repo_when_boundary_fits`: prefer updating existing repo when boundaries/ownership remain valid.
+- `repo_strategy.new_repo_requires_boundary_and_ownership_justification`: new repos require clear boundary, ownership, and lifecycle rationale.
 
 ## Minimum planning artifacts
 - `docs/repo-topology-decision.md`
@@ -59,6 +73,10 @@ Define a generic, dependency-driven planning behavior model that can be configur
 - If profile is missing or not loaded via MCP evidence, planning status is `BLOCKED`.
 - If required controls are unresolved or violated, implementation status is `BLOCKED`.
 - If zero-downtime upgrade strategy is missing for production-facing changes, planning status is `BLOCKED`.
+- If a custom storage solution is chosen without documented balanced tradeoff analysis versus standard third-party alternatives, planning status is `BLOCKED`.
+- If a proposed service/module lacks explicit value and lifecycle maintenance cost analysis, planning status is `BLOCKED`.
+- If a proposed service/module lacks necessity evidence or duplicates existing capability without justification, planning status is `BLOCKED`.
+- If repo action (`create`/`update`) is not explicitly defined for each planned service/module, planning status is `BLOCKED`.
 
 For HTTP/API implementation work, if mandatory contract-first controls are unset, status must default to `BLOCKED` until controls are resolved.
 
